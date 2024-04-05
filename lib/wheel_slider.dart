@@ -324,6 +324,13 @@ class _WheelSliderState extends State<WheelSlider> {
         alignment: Alignment.center,
         children: [
           widget.background,
+          IgnorePointer(
+            ignoring: widget.allowPointerTappable,
+            child: Visibility(
+              visible: widget.showPointer,
+              child: widget.customPointer ?? widget.pointer!,
+            ),
+          ),
           WheelChooser.custom(
             controller: _scrollController,
             onValueChanged: (val) async {
@@ -356,13 +363,6 @@ class _WheelSliderState extends State<WheelSlider> {
             listHeight: widget.listHeight,
             squeeze: widget.squeeze,
             physics: widget.scrollPhysics,
-          ),
-          IgnorePointer(
-            ignoring: widget.allowPointerTappable,
-            child: Visibility(
-              visible: widget.showPointer,
-              child: widget.customPointer ?? widget.pointer!,
-            ),
           ),
           // For details on this widget check out the document here https://api.flutter.dev/flutter/widgets/IgnorePointer-class.html
         ],
